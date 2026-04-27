@@ -133,7 +133,7 @@ function setLoading(state) {
 // =====================================
 async function askBot(message) {
   try {
-    const res = await fetch("http://localhost:8000/chat", {
+    const res = await fetch("/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
