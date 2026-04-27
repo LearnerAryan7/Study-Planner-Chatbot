@@ -1,0 +1,26 @@
+{
+  "name": "study-planner-ai",
+  "version": "1.0.0",
+  "description": "AI powered study planner chatbot",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "study",
+    "planner",
+    "chatbot",
+    "gemini",
+    "ai"
+  ],
+  "author": "Aryan",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^16.6.1",
+    "express": "^4.22.1",
+    "node-fetch": "^2.7.0"
+  }
+}

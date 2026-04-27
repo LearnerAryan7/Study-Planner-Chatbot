@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Study Planner AI</title>
+
+<link rel="stylesheet" href="style.css"/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- =========================
+       SIDEBAR
+  ========================== -->
+  <aside class="sidebar">
+
+    <div class="logoBox">
+      <div class="logo">🎓</div>
+
+      <div>
+        <h2>Study Planner AI</h2>
+        <p>Plan Smarter. Win Easier.</p>
+      </div>
+    </div>
+
+    <button class="newChatBtn" onclick="newChat()">
+      + New Chat
+    </button>
+
+    <div class="menu">
+
+      <div class="menuItem active">
+        💬 Chat
+      </div>
+
+      <div class="menuItem">
+        📅 Study Plans
+      </div>
+
+      <div class="menuItem">
+        📘 Subjects
+      </div>
+
+      <div class="menuItem">
+        🎯 Goals
+      </div>
+
+      <div class="menuItem">
+        📊 Analytics
+      </div>
+
+    </div>
+
+    <!-- =========================
+REPLACE ONLY THIS PART IN index.html
+(old streak card)
+========================= -->
+
+<div class="card streak">
+  <h4>Study Streak 🔥</h4>
+  <h1 id="streakCount">1</h1>
+  <p>Days Consistent</p>
+</div>
+
+    <div class="card pro">
+      <h4>Premium Mode</h4>
+      <p>Focus harder. Win easier.</p>
+    </div>
+
+  </aside>
+
+  <!-- =========================
+       MAIN CHAT PANEL
+  ========================== -->
+  <main class="main">
+
+    <div class="topbar">
+
+      <div>
+        <h1>Hey 👋</h1>
+        <p>Your AI study companion</p>
+      </div>
+
+      <div class="badge">
+        Online
+      </div>
+
+    </div>
+
+    <!-- wave -->
+    <div class="waveBox">
+      <div class="wave"></div>
+    </div>
+
+    <!-- messages -->
+    <section class="chatArea" id="chatWindow"></section>
+
+    <!-- input -->
+    <div class="inputBar">
+
+      <input
+        type="text"
+        id="userInput"
+        placeholder="Ask about exams, backlog, motivation, timetable..."
+      />
+
+      <button onclick="handleSend()">
+        Send ➜
+      </button>
+
+    </div>
+
+  </main>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
