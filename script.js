@@ -133,7 +133,7 @@ function setLoading(state) {
 // =====================================
 async function askBot(message) {
   try {
-    const res = await fetch("/chat", {
+    const res = await fetch("https://study-planner-chatbot.onrender.com/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
