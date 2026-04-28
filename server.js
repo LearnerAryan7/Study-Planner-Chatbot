@@ -35,6 +35,58 @@ function isGreeting(msg) {
 }
 
 // ==========================
+// STUDY / EDUCATION FILTER
+// ==========================
+function isStudyRelated(msg) {
+  const text = msg.toLowerCase();
+
+  const keywords = [
+    "study",
+    "exam",
+    "subject",
+    "math",
+    "maths",
+    "science",
+    "english",
+    "physics",
+    "chemistry",
+    "biology",
+    "history",
+    "geography",
+    "hours",
+    "days",
+    "daily",
+    "prepare",
+    "preparation",
+    "class",
+    "school",
+    "college",
+    "routine",
+    "focus",
+    "backlog",
+    "revision",
+    "syllabus",
+    "marks",
+    "semester",
+    "assignment",
+    "test",
+    "machine",
+    "learning",
+    "ai",
+    "coding",
+    "programming",
+    "dsa",
+    "database",
+    "algorithm",
+    "planner",
+    "plan",
+    "motivation"
+  ];
+
+  return keywords.some(word => text.includes(word));
+}
+
+// ==========================
 // ROUTE
 // ==========================
 app.post("/chat", async (req, res) => {
@@ -44,7 +96,7 @@ app.post("/chat", async (req, res) => {
     // empty input
     if (!message) {
       return res.json({
-        reply: "Type something and let’s get started 😏"
+        reply: "Type something and let’s build your comeback 😏"
       });
     }
 
@@ -59,7 +111,15 @@ app.post("/chat", async (req, res) => {
     if (isGreeting(message)) {
       return res.json({
         reply:
-          "Hey 👋 I’m ready.\nAsk me anything about studies, productivity, coding, career or planning."
+          "Hey 👋 What’s the mission today?\n\n• Exams\n• Backlog\n• Coding\n• Routine\n• Productivity"
+      });
+    }
+
+    // Allow numbers + study keywords
+    if (!isStudyRelated(message) && !/\d+/.test(message)) {
+      return res.json({
+        reply:
+          "I’m built for study planning only 📚 Ask me about exams, backlog, routine, focus, timetable or subjects."
       });
     }
 
@@ -75,34 +135,33 @@ app.post("/chat", async (req, res) => {
 You are Study Planner AI.
 
 Identity:
-You are a premium AI assistant.
+You are a premium AI assistant for students.
 
-Core Strengths:
-- studies
+You help with:
 - exams
+- backlog recovery
+- study plans
+- coding roadmap
 - productivity
-- planning
-- coding help
-- career guidance
 - motivation
-- smart explanations
+- subject guidance
+- career learning paths
 
 Tone:
-- friendly
-- modern
+- smart
 - practical
+- concise
+- motivating
+- modern
 - human
-- sharp
-- never robotic
 
 Rules:
-- Give clear and useful answers
-- Be concise unless detailed answer is requested
-- Use bullets when useful
-- Personalize when possible
-- If user asks anything outside studies, still help politely
-- Never invent fake facts
-- Never act rude
+- Give useful answers
+- Be concise unless detailed answer requested
+- Use bullets where useful
+- Personalize replies
+- No fake assumptions
+- No hallucinations
 
 Recent Chat:
 ${history}
@@ -128,7 +187,7 @@ ${message}
             {
               role: "system",
               content:
-                "You are a premium AI assistant focused on studies, productivity, planning, coding, and helpful guidance. Handle any user query intelligently. Never invent facts."
+                "You are a premium AI assistant focused on studies, coding, exams, productivity and planning. Never invent facts."
             },
             {
               role: "user",
@@ -143,9 +202,6 @@ ${message}
 
     const data = await response.json();
 
-    console.log("GROQ RESPONSE:");
-    console.log(JSON.stringify(data, null, 2));
-
     let reply =
       "Hmm, something glitched. Ask me again and we’ll recover nicely 😏";
 
@@ -159,13 +215,11 @@ ${message}
       reply = data.choices[0].message.content.trim();
     }
 
-    // save bot reply
     saveChat("Bot", reply);
 
     return res.json({ reply });
 
   } catch (error) {
-    console.log("ERROR:");
     console.log(error);
 
     return res.json({
